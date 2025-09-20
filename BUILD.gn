@@ -1,0 +1,80 @@
+# WinNTCompatLib
+# Provides replacements for missing functions to allow v141_xp compiled
+# binaries to run on Windows 2000 and XP RTM - SP2.
+
+import("//build/config/win/target_version.gni")
+
+group("libnt5_all") {
+  deps = [
+    ":libnt5",
+    ":libnt5_test",
+    ":libnt5_headers",
+  ]
+}
+
+executable("libnt5_test") {
+  configs -= [
+    "//build/config/win:nominmax",
+    "//build/config/win:console",
+  ]
+
+  configs += [
+    "//build/config/win:lean_and_mean",
+    "//build/config/win:windowed",
+    ":libnt5_config",
+  ]
+
+  sources = [
+    "libnt5_test.cc",
+  ]
+
+  public_deps = [
+    ":libnt5",
+    ":libnt5_headers",
+  ]
+}
+
+# Originally called EnlyzeWinCompatLib
+static_library("libnt5") {
+  configs -= [ "//build/config/win:nominmax", ]
+  configs -= [ "//build/config/win:default_libs" ]
+  configs += [
+    "//build/config/win:lean_and_mean",
+    "//build/config:no_default_lib",
+  ]
+
+  sources = [
+    "src/targetver.h",
+    "src/EnlyzeWinCompatLib.h",
+    "src/EnlyzeWinCompatLibInternal.h",
+    "src/winnt_50.cpp",
+    "src/winnt_51.cpp",
+    "src/winnt_51_sp2.cpp",
+  ]
+  sources += [
+    "src/winnt_50_forwarders.asm",
+    "src/winnt_51_forwarders.asm",
+    "src/winnt_51_sp2_forwarders.asm",
+  ]
+}
+
+source_set("libnt5_headers") {
+  configs -= [ "//build/config/win:nominmax", ]
+  configs -= [ "//build/config/win:default_libs" ]
+  configs += [
+    "//build/config/win:lean_and_mean",
+    "//build/config:no_default_lib",
+  ]
+
+  sources = [ "src/EnlyzeWinCompatLib.h", ]
+}
+
+config("libnt5_config") {
+  cflags = []
+  ldflags = []
+  libs = []
+
+  ldflags += [
+    "/DEFAULTLIB:libnt5.lib",
+  ]
+}
