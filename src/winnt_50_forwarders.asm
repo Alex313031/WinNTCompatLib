@@ -15,6 +15,9 @@ EXTERN _LibInterlockedPopEntrySList@4 : PROC
 EXTERN _LibInterlockedPushEntrySList@8 : PROC
 EXTERN _LibQueryDepthSList@4 : PROC
 
+EXTERN _LibHeapQueryInformation@20 : PROC
+EXTERN _LibHeapSetInformation@16 : PROC
+
 .data
 
 PUBLIC __imp__GetModuleHandleExW@12
@@ -40,5 +43,11 @@ __imp__InterlockedPushEntrySList@8 dd _LibInterlockedPushEntrySList@8
 
 PUBLIC __imp__QueryDepthSList@4
 __imp__QueryDepthSList@4 dd _LibQueryDepthSList@4
+
+PUBLIC __imp__HeapQueryInformation@20
+__imp__HeapQueryInformation@20 dd _LibHeapQueryInformation@20
+
+PUBLIC __imp__HeapSetInformation@16
+__imp__HeapSetInformation@16 dd _LibHeapSetInformation@16
 
 END

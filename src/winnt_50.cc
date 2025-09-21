@@ -16,6 +16,9 @@ typedef PSLIST_ENTRY (WINAPI *PFN_INTERLOCKEDPOPENTRYSLIST)(PSLIST_HEADER ListHe
 typedef PSLIST_ENTRY (WINAPI *PFN_INTERLOCKEDPUSHENTRYSLIST)(PSLIST_HEADER ListHead, PSLIST_ENTRY ListEntry);
 typedef USHORT (WINAPI *PFN_QUERYDEPTHSLIST)(PSLIST_HEADER ListHead);
 
+typedef BOOL (WINAPI *PFN_HEAPQUERYINFORMATION)(HANDLE hHeap, HEAP_INFORMATION_CLASS heapClass, PVOID heapInfo, SIZE_T heapLength, PSIZE_T returnLength);
+typedef BOOL (WINAPI *PFN_HEAPSETINFORMATION)(HANDLE hHeap, HEAP_INFORMATION_CLASS heapClass, PVOID heapInfo, SIZE_T heapLength);
+
 static PFN_GETMODULEHANDLEEXW pfnGetModuleHandleExW = nullptr;
 static PFN_GETNUMAHIGHESTNODENUMBER pfnGetNumaHighestNodeNumber = nullptr;
 static PFN_GETVERSIONEXW pfnGetVersionExW = nullptr;
@@ -24,6 +27,9 @@ static PFN_INTERLOCKEDFLUSHSLIST pfnInterlockedFlushSList = nullptr;
 static PFN_INTERLOCKEDPOPENTRYSLIST pfnInterlockedPopEntrySList = nullptr;
 static PFN_INTERLOCKEDPUSHENTRYSLIST pfnInterlockedPushEntrySList = nullptr;
 static PFN_QUERYDEPTHSLIST pfnQueryDepthSList = nullptr;
+
+static PFN_HEAPQUERYINFORMATION pfnHeapQueryInformation = nullptr;
+static PFN_HEAPSETINFORMATION pfnHeapSetInformation = nullptr;
 
 static BOOL WINAPI
 _CompatGetModuleHandleExW(DWORD dwFlags, LPCWSTR lpModuleName, HMODULE* phModule)
@@ -206,6 +212,32 @@ _CompatQueryDepthSList(PSLIST_HEADER ListHead)
     return ListHead->Depth;
 }
 
+static BOOL WINAPI
+_CompatHeapQueryInformation(HANDLE HeapHandle,
+                            HEAP_INFORMATION_CLASS HeapInformationClass,
+                            PVOID HeapInformation,
+                            SIZE_T HeapInformationLength,
+                            PSIZE_T ReturnLength) {
+  UNREFERENCED_PARAMETER(HeapHandle);
+  UNREFERENCED_PARAMETER(HeapInformationClass);
+  UNREFERENCED_PARAMETER(HeapInformation);
+  UNREFERENCED_PARAMETER(HeapInformationLength);
+  UNREFERENCED_PARAMETER(ReturnLength);
+  return FALSE;
+}
+
+static BOOL WINAPI
+_CompatHeapSetInformation(HANDLE HeapHandle,
+                          HEAP_INFORMATION_CLASS HeapInformationClass,
+                          PVOID HeapInformation,
+                          SIZE_T HeapInformationLength) {
+  UNREFERENCED_PARAMETER(HeapHandle);
+  UNREFERENCED_PARAMETER(HeapInformationClass);
+  UNREFERENCED_PARAMETER(HeapInformation);
+  UNREFERENCED_PARAMETER(HeapInformationLength);
+  return FALSE;
+}
+
 extern "C" BOOL WINAPI
 LibGetModuleHandleExW(DWORD dwFlags, LPCWSTR lpModuleName, HMODULE * phModule)
 {
@@ -350,4 +382,43 @@ LibQueryDepthSList(PSLIST_HEADER ListHead)
     }
 
     return pfnQueryDepthSList(ListHead);
+}
+
+extern "C" BOOL WINAPI
+LibHeapQueryInformation(HANDLE hHeap,
+                        HEAP_INFORMATION_CLASS heapClass,
+                        PVOID heapInfo,
+                        SIZE_T heapLength,
+                        PSIZE_T returnLength) {
+    if (!pfnHeapQueryInformation)
+    {
+        // Check if the API is provided by kernel32, otherwise fall back to our implementation.
+        HMODULE hKernel32 = GetModuleHandleW(L"kernel32");
+        pfnHeapQueryInformation = reinterpret_cast<PFN_HEAPQUERYINFORMATION>(GetProcAddress(hKernel32, "HeapQueryInformation"));
+        if (!pfnHeapQueryInformation)
+        {
+            pfnHeapQueryInformation = _CompatHeapQueryInformation;
+        }
+    }
+
+    return pfnHeapQueryInformation(hHeap, heapClass, heapInfo, heapLength, returnLength);
+}
+
+extern "C" BOOL WINAPI
+LibHeapSetInformation(HANDLE hHeap,
+                      HEAP_INFORMATION_CLASS heapClass,
+                      PVOID heapInfo,
+                      SIZE_T heapLength) {
+    if (!pfnHeapSetInformation)
+    {
+        // Check if the API is provided by kernel32, otherwise fall back to our implementation.
+        HMODULE hKernel32 = GetModuleHandleW(L"kernel32");
+        pfnHeapSetInformation = reinterpret_cast<PFN_HEAPSETINFORMATION>(GetProcAddress(hKernel32, "HeapSetInformation"));
+        if (!pfnHeapSetInformation)
+        {
+            pfnHeapSetInformation = _CompatHeapSetInformation;
+        }
+    }
+
+    return pfnHeapSetInformation(hHeap, heapClass, heapInfo, heapLength);
 }
