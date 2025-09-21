@@ -1,11 +1,12 @@
-# WinNTCompatLib
+# LibNT5
 # Provides replacements for missing functions to allow v141_xp compiled
 # binaries to run on Windows 2000 and XP RTM - SP2.
 
 import("//build/config/win/target_version.gni")
 
 group("libnt5_all") {
-  deps = [
+  public_deps = [
+    ":copy_libnt5_libs",
     ":libnt5",
     ":libnt5_test",
     ":libnt5_headers",
@@ -47,6 +48,10 @@ static_library("libnt5") {
     "src/targetver.h",
     "src/EnlyzeWinCompatLib.h",
     "src/EnlyzeWinCompatLibInternal.h",
+    "src/libnt5.h",
+    "src/version.h",
+  ]
+  sources += [
     "src/winnt_50.cpp",
     "src/winnt_51.cpp",
     "src/winnt_51_sp2.cpp",
@@ -77,4 +82,14 @@ config("libnt5_config") {
   ldflags += [
     "/DEFAULTLIB:libnt5.lib",
   ]
+}
+
+copy("copy_libnt5_libs") {
+  sources = [
+    "$root_out_dir/obj/src/libnt5/libnt5.lib",
+  ]
+  outputs = [
+    "$root_out_dir/libnt5.lib",
+  ]
+  deps = [ ":libnt5", ]
 }
