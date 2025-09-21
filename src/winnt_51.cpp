@@ -5,7 +5,7 @@
 //
 
 // This file implements required APIs not available in Windows XP RTM (NT 5.1).
-#include "EnlyzeWinCompatLibInternal.h"
+#include "libnt5_internal.h"
 
 typedef PVOID (WINAPI *PFN_DECODEPOINTER)(PVOID Ptr);
 typedef PVOID (WINAPI *PFN_ENCODEPOINTER)(PVOID Ptr);

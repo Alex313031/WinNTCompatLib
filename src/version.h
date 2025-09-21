@@ -1,6 +1,8 @@
 #ifndef LIBNT5_VERSION_H_
 #define LIBNT5_VERSION_H_
 
+#pragma once
+
 #pragma code_page(65001) // UTF-8
 
 // Macro to convert to string

@@ -5,7 +5,7 @@
 //
 
 // This file implements required APIs not available in Windows XP SP2 (NT 5.1).
-#include "EnlyzeWinCompatLibInternal.h"
+#include "libnt5_internal.h"
 
 typedef BOOL (WINAPI *PFN_GETLOGICALPROCESSORINFORMATION)(PSYSTEM_LOGICAL_PROCESSOR_INFORMATION Buffer, PDWORD ReturnedLength);
 

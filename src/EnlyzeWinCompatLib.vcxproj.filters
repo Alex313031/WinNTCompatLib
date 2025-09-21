@@ -26,7 +26,10 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EnlyzeWinCompatLibInternal.h">
+    <ClInclude Include="version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="libnt5_internal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

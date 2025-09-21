@@ -5,7 +5,7 @@
 //
 
 // This file implements required APIs not available in Windows 2000 RTM (NT 5.0).
-#include "EnlyzeWinCompatLibInternal.h"
+#include "libnt5_internal.h"
 
 typedef BOOL (WINAPI *PFN_GETMODULEHANDLEEXW)(DWORD dwFlags, LPCWSTR lpModuleName, HMODULE* phModule);
 typedef BOOL (WINAPI *PFN_GETNUMAHIGHESTNODENUMBER)(PULONG HighestNodeNumber);
