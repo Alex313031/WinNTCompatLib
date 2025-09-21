@@ -77,8 +77,8 @@ source_set("libnt5_headers") {
   ]
 
   sources = [
-    #"src/EnlyzeWinCompatLib.h",
-    "src/libnt5.h",
+    "src/EnlyzeWinCompatLib.h",
+    "src/libnt5_dll.h",
   ]
 }
 
@@ -96,7 +96,6 @@ static_library("libnt5_static") {
     "src/targetver.h",
     "src/EnlyzeWinCompatLib.h",
     "src/libnt5_internal.h",
-    "src/libnt5.h",
     "src/version.h",
   ]
   sources += [
@@ -109,6 +108,7 @@ static_library("libnt5_static") {
     "src/winnt_51_forwarders.asm",
     "src/winnt_51_sp2_forwarders.asm",
   ]
+  output_name = "libnt5"
 }
 
 # DLL version
@@ -120,15 +120,20 @@ shared_library("libnt5_shared") {
     "//build/config:no_default_lib",
     ":libnt5_private_config",
   ]
+
+  sources = [
+    "src/libnt5_dll.h",
+  ]
+  output_name = "libnt5"
 }
 
 # Copy built .libs to build output dir
 copy("copy_libnt5_libs") {
   sources = [
-    "$root_out_dir/obj/src/libnt5/libnt5_static.lib",
+    "$root_out_dir/obj/src/libnt5/libnt5.lib",
   ]
   outputs = [
-    "$root_out_dir/libnt5_static.lib",
+    "$root_out_dir/libnt5.lib",
   ]
   public_deps = [
     ":libnt5_static",
@@ -151,9 +156,9 @@ config("libnt5_public_config") {
   libs = []
 
   ldflags += [
-    "/DEFAULTLIB:libnt5_static.lib",
+    "/DEFAULTLIB:libnt5.lib",
   ]
   libs += [
-    "libnt5_static.lib",
+    "libnt5.lib",
   ]
 }
