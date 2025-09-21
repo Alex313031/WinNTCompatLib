@@ -2,18 +2,45 @@
 # Provides replacements for missing functions to allow v141_xp compiled
 # binaries to run on Windows 2000 and XP RTM - SP2.
 
+import("//build/config/precompiled_header.gni")
+import("//build/config/static_shared.gni")
+import("//build/config/win/manifest.gni")
 import("//build/config/win/target_version.gni")
 
+# Build everything, dependants should depend on this target
+# or one of the "libnt5_*" targets (usually "libnt5_static"). 
 group("libnt5_all") {
+  testonly = true
   public_deps = [
-    ":copy_libnt5_libs",
     ":libnt5",
-    ":libnt5_test",
+    ":libnt5_tests",
     ":libnt5_headers",
+    ":libnt5_static",
+    #":libnt5_shared",
   ]
 }
 
+# Build everything excluding tests
+group("libnt5") {
+  public_deps = [
+    ":libnt5_headers",
+    ":libnt5_libs",
+    ":libnt5_static",
+    #":libnt5_shared",
+  ]
+}
+
+# Unit tests and test program(s)
+group("libnt5_tests") {
+  testonly = true
+  public_deps = [
+    ":libnt5_test",
+  ]
+}
+
+# Small test program to make sure lib makes programs that run on Win 2K
 executable("libnt5_test") {
+  testonly = true
   configs -= [
     "//build/config/win:nominmax",
     "//build/config/win:console",
@@ -30,13 +57,25 @@ executable("libnt5_test") {
   ]
 
   public_deps = [
-    ":libnt5",
+    ":libnt5_static",
     ":libnt5_headers",
   ]
 }
 
+# Headers for consumers of the library
+source_set("libnt5_headers") {
+  configs -= [ "//build/config/win:nominmax", ]
+  configs -= [ "//build/config/win:default_libs" ]
+  configs += [
+    "//build/config/win:lean_and_mean",
+    "//build/config:no_default_lib",
+  ]
+
+  sources = [ "src/EnlyzeWinCompatLib.h", ]
+}
+
 # Originally called EnlyzeWinCompatLib
-static_library("libnt5") {
+static_library("libnt5_static") {
   configs -= [ "//build/config/win:nominmax", ]
   configs -= [ "//build/config/win:default_libs" ]
   configs += [
@@ -63,15 +102,27 @@ static_library("libnt5") {
   ]
 }
 
-source_set("libnt5_headers") {
+# DLL version
+shared_library("libnt5_shared") {
   configs -= [ "//build/config/win:nominmax", ]
   configs -= [ "//build/config/win:default_libs" ]
   configs += [
     "//build/config/win:lean_and_mean",
     "//build/config:no_default_lib",
   ]
+}
 
-  sources = [ "src/EnlyzeWinCompatLib.h", ]
+copy("libnt5_libs") {
+  sources = [
+    "$root_out_dir/obj/src/libnt5/libnt5_static.lib",
+  ]
+  outputs = [
+    "$root_out_dir/libnt5_static.lib",
+  ]
+  public_deps = [
+    ":libnt5_static",
+    #":libnt5_shared",
+  ]
 }
 
 config("libnt5_config") {
@@ -80,16 +131,6 @@ config("libnt5_config") {
   libs = []
 
   ldflags += [
-    "/DEFAULTLIB:libnt5.lib",
+    "/DEFAULTLIB:libnt5_static.lib",
   ]
-}
-
-copy("copy_libnt5_libs") {
-  sources = [
-    "$root_out_dir/obj/src/libnt5/libnt5.lib",
-  ]
-  outputs = [
-    "$root_out_dir/libnt5.lib",
-  ]
-  deps = [ ":libnt5", ]
 }
