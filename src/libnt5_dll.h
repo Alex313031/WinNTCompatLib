@@ -1,6 +1,6 @@
-#ifndef LIBNT5_H_
-#define LIBNT5_H_
+#ifndef LIBNT5_DLL_H_
+#define LIBNT5_DLL_H_
 
 
 
-#endif // LIBNT5_H_
+#endif // LIBNT5_DLL_H_

@@ -9,13 +9,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="winnt_50.cpp">
+    <ClCompile Include="winnt_50.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="winnt_51.cpp">
+    <ClCompile Include="winnt_51.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="winnt_51_sp2.cpp">
+    <ClCompile Include="winnt_51_sp2.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

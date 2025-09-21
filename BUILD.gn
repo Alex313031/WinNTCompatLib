@@ -99,9 +99,9 @@ static_library("libnt5_static") {
     "src/version.h",
   ]
   sources += [
-    "src/winnt_50.cpp",
-    "src/winnt_51.cpp",
-    "src/winnt_51_sp2.cpp",
+    "src/winnt_50.cc",
+    "src/winnt_51.cc",
+    "src/winnt_51_sp2.cc",
   ]
   sources += [
     "src/winnt_50_forwarders.asm",

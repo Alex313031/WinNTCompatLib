@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="winnt_50.cpp" />
-    <ClCompile Include="winnt_51.cpp" />
-    <ClCompile Include="winnt_51_sp2.cpp" />
+    <ClCompile Include="winnt_50.cc" />
+    <ClCompile Include="winnt_51.cc" />
+    <ClCompile Include="winnt_51_sp2.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="libnt5.h" />
