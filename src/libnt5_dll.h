@@ -3,4 +3,4 @@
 
 
 
-#endif // LIBNT5_H_
+#endif // LIBNT5_DLL_H_
