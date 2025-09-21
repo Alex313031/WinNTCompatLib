@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <WinSDKVer.h>
+#include <winsdkver.h>
 
 #ifndef WINVER
 #define WINVER _WIN32_WINNT_WIN2K
@@ -24,4 +24,4 @@
 #define _WIN32_IE 0x0501
 #endif // _WIN32_IE
 
-#include <SDKDDKVer.h>
+#include <sdkddkver.h>

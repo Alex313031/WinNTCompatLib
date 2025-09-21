@@ -7,5 +7,8 @@
 #pragma once
 
 #include "targetver.h"
-#include <Windows.h>
+
+#include <windows.h>
 #include <intrin.h>
+
+#include "version.h"

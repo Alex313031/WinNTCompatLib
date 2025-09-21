@@ -14,9 +14,6 @@ group("libnt5_all") {
   public_deps = [
     ":libnt5",
     ":libnt5_tests",
-    ":libnt5_headers",
-    ":libnt5_static",
-    #":libnt5_shared",
   ]
 }
 
@@ -25,6 +22,15 @@ group("libnt5") {
   public_deps = [
     ":libnt5_headers",
     ":libnt5_libs",
+  ]
+}
+
+# Build just libraries
+group("libnt5_libs") {
+  deps = [
+    ":copy_libnt5_libs",
+  ]
+  public_deps = [
     ":libnt5_static",
     #":libnt5_shared",
   ]
@@ -49,7 +55,7 @@ executable("libnt5_test") {
   configs += [
     "//build/config/win:lean_and_mean",
     "//build/config/win:windowed",
-    ":libnt5_config",
+    ":libnt5_public_config",
   ]
 
   sources = [
@@ -57,8 +63,7 @@ executable("libnt5_test") {
   ]
 
   public_deps = [
-    ":libnt5_static",
-    ":libnt5_headers",
+    ":libnt5",
   ]
 }
 
@@ -71,7 +76,10 @@ source_set("libnt5_headers") {
     "//build/config:no_default_lib",
   ]
 
-  sources = [ "src/EnlyzeWinCompatLib.h", ]
+  sources = [
+    #"src/EnlyzeWinCompatLib.h",
+    "src/libnt5.h",
+  ]
 }
 
 # Originally called EnlyzeWinCompatLib
@@ -81,6 +89,7 @@ static_library("libnt5_static") {
   configs += [
     "//build/config/win:lean_and_mean",
     "//build/config:no_default_lib",
+    ":libnt5_private_config",
   ]
 
   sources = [
@@ -109,10 +118,12 @@ shared_library("libnt5_shared") {
   configs += [
     "//build/config/win:lean_and_mean",
     "//build/config:no_default_lib",
+    ":libnt5_private_config",
   ]
 }
 
-copy("libnt5_libs") {
+# Copy built .libs to build output dir
+copy("copy_libnt5_libs") {
   sources = [
     "$root_out_dir/obj/src/libnt5/libnt5_static.lib",
   ]
@@ -125,12 +136,24 @@ copy("libnt5_libs") {
   ]
 }
 
-config("libnt5_config") {
+# Compiler config for libnt5 itself
+config("libnt5_private_config") {
+  # Don't use precompiled headers
+  cflags = [ "/Y-", ]
+  ldflags = []
+  libs = []
+}
+
+# Compiler config for dependants/consumers to link the library in properly for Win 2k
+config("libnt5_public_config") {
   cflags = []
   ldflags = []
   libs = []
 
   ldflags += [
     "/DEFAULTLIB:libnt5_static.lib",
+  ]
+  libs += [
+    "libnt5_static.lib",
   ]
 }
