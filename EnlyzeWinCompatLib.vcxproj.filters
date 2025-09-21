@@ -9,38 +9,38 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="winnt_50.cc">
+    <ClCompile Include="src\winnt_50.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="winnt_51.cc">
+    <ClCompile Include="src\winnt_51.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="winnt_51_sp2.cc">
+    <ClCompile Include="src\winnt_51_sp2.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="libnt5.h">
+    <ClInclude Include="src\libnt5.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="targetver.h">
+    <ClInclude Include="src\targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="version.h">
+    <ClInclude Include="src\version.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="libnt5_internal.h">
+    <ClInclude Include="src\libnt5_internal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <MASM Include="winnt_50_forwarders.asm">
+    <MASM Include="src\winnt_50_forwarders.asm">
       <Filter>Source Files</Filter>
     </MASM>
-    <MASM Include="winnt_51_forwarders.asm">
+    <MASM Include="src\winnt_51_forwarders.asm">
       <Filter>Source Files</Filter>
     </MASM>
-    <MASM Include="winnt_51_sp2_forwarders.asm">
+    <MASM Include="src\winnt_51_sp2_forwarders.asm">
       <Filter>Source Files</Filter>
     </MASM>
   </ItemGroup>
