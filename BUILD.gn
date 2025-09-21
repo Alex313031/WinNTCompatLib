@@ -77,7 +77,7 @@ source_set("libnt5_headers") {
   ]
 
   sources = [
-    "src/EnlyzeWinCompatLib.h",
+    "src/libnt5.h",
     "src/libnt5_dll.h",
   ]
 }
@@ -94,7 +94,7 @@ static_library("libnt5_static") {
 
   sources = [
     "src/targetver.h",
-    "src/EnlyzeWinCompatLib.h",
+    "src/libnt5.h",
     "src/libnt5_internal.h",
     "src/version.h",
   ]
