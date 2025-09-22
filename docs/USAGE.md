@@ -1,8 +1,8 @@
-## libnt5 Usage
+# libnt5 Usage
 
 For building libnt5 itself from source, see [BUILDING.md](BUILDING.md).
 
-### Using in C/C++ Win32 Development
+## Using in C/C++ Win32 Development
 
  How to use this library in your projects to compile for NT 5.x:  
 
