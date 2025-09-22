@@ -12,7 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winnt_50.cc" />
-    <ClCompile Include="winnt_51.cc" />
+    <ClCompile Include="winnt_51_sp1.cc" />
     <ClCompile Include="winnt_51_sp2.cc" />
   </ItemGroup>
   <ItemGroup>
@@ -23,7 +23,7 @@
   </ItemGroup>
   <ItemGroup>
     <MASM Include="winnt_50_forwarders.asm" />
-    <MASM Include="winnt_51_forwarders.asm" />
+    <MASM Include="winnt_51_sp1_forwarders.asm" />
     <MASM Include="winnt_51_sp2_forwarders.asm" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

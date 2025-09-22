@@ -101,13 +101,13 @@ static_library("libnt5_static") {
   ]
   sources += [
     "src/winnt_50.cc",
-    "src/winnt_51.cc",
+    "src/winnt_51_sp1.cc",
     "src/winnt_51_sp2.cc",
   ]
   if (current_cpu == "x86") {
     sources += [
       "src/winnt_50_forwarders.asm",
-      "src/winnt_51_forwarders.asm",
+      "src/winnt_51_sp1_forwarders.asm",
       "src/winnt_51_sp2_forwarders.asm",
     ]
   } else if (current_cpu == "x64") {
@@ -154,6 +154,9 @@ config("libnt5_private_config") {
   cflags = [ "/Y-", ]
   ldflags = []
   libs = []
+  include_dirs = [
+    "src/",
+  ]
 }
 
 # Compiler config for dependants/consumers to link the library in properly for Win 2k
@@ -161,6 +164,10 @@ config("libnt5_public_config") {
   cflags = []
   ldflags = []
   libs = []
+
+  include_dirs = [
+    "src/",
+  ]
 
   ldflags += [
     "/DEFAULTLIB:libnt5.lib",

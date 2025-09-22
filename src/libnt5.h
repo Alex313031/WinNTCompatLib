@@ -13,8 +13,12 @@
 // This ensures that EnlyzeWinCompatLib's compatibility code is linked before the Win32 libraries
 // and therefore preferred.
 
+#ifndef LIBNT5_H_
+#define LIBNT5_H_
+
 #pragma once
 
+#if !defined(__clang__)
 #pragma comment(lib, "kernel32.lib")
 #pragma comment(lib, "user32.lib")
 #pragma comment(lib, "gdi32.lib")
@@ -28,3 +32,10 @@
 #pragma comment(lib, "uuid.lib")
 #pragma comment(lib, "odbc32.lib")
 #pragma comment(lib, "odbccp32.lib")
+#endif // !defined(__clang__)
+
+#ifndef _USING_LIBNT5
+#define _USING_LIBNT5
+#endif // _USING_LIBNT5
+
+#endif // LIBNT5_H_

@@ -49,6 +49,8 @@ See also > [Here](https://betawiki.net/wiki/User:Uncle_Captain/Drafts/Kernel_fun
 ### Introduced in Windows XP Service Pack 1
  __*- Spoofed to allow running on XP RTM.*__
 
+[GetDllDirectory()](https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-getdlldirectoryw) - *yet to implement* 
+
 [SetDllDirectory()](https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-setdlldirectoryw) - *yet to implement* 
 
 [GetProcessId()](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-getprocessid) - *yet to implement* 
