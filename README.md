@@ -1,15 +1,15 @@
-# LibNT5 <img src="assets/libnt5_logo.png">
+# LibNT5 <img src="assets/libnt5_logo.png" width="46">
+
+<img src="assets/Designed_for_Windows_2000.png" height="168" align="right">
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.md)
 
-A static/shared library to allow applications compiled with the [Windows 7.1 SDK + v141_xp toolset](https://learn.microsoft.com/en-us/cpp/build/configuring-programs-for-windows-xp) 
-to run on Windows 2000 SP4 and Windows XP RTM - SP2.
+A static/shared library to allow applications compiled with the [v141_xp toolset](https://learn.microsoft.com/en-us/cpp/build/configuring-programs-for-windows-xp/) 
+to run on Windows 2000 SP4 and Windows XP RTM - SP2.  
 
-<img src="assets/Designed_for_Windows_2000.png">
-
-It is a fork of [EnlyzeWinCompatLib](https://github.com/enlyze/EnlyzeWinCompatLib), modified, modernized  
-and made to compile on MSVS 2022 AS WELL AS with [GN](https://gn.googlesource.com/gn/), [Ninja](https://ninja-build.org/)
-, [LLVM](https://llvm.org/) & [Clang](https://clang.llvm.org/) for ease of development and code portability.
+It is a fork of [EnlyzeWinCompatLib](https://github.com/enlyze/EnlyzeWinCompatLib), modified, modernized 
+and made to compile on Visual Studio 2022 *as well as* with [GN](https://gn.googlesource.com/gn/), [Ninja](https://ninja-build.org/), 
+[LLVM](https://llvm.org/) & [Clang](https://clang.llvm.org/) for ease of development and code portability.
 
 ## Changes from upstream
 
@@ -30,20 +30,32 @@ Note: The shared library and test executables can't be built yet.
 ```
 
 ### Building with GN/Ninja && LLVM/Clang
-This is the default way this library is built. It requires using my [gn-build](https://github.com/Alex313031/gn-build#readme) repository
-as the build system. Using that also requires [downloading LLVM]().
+ This is the default way this library is built. It requires using my [gn-build](https://github.com/Alex313031/gn-build#readme) repository 
+as the build system. Using that also requires [downloading LLVM]().  
 
 ```code
  - For your GN args, use the debug_args.gn or release_args.gn
 ```
 
-## More Information
+## Usage
 
-There is also [a branch](https://github.com/enlyze/EnlyzeWinCompatLib/tree/clang-vs2022) to let Clang-compiled applications run  
+### Target System Prerequisites
+ Minimum requirements that the target system must have to run executables made with this project:  
+ - For Windows 2000, [Service Pack 4](https://winworldpc.com/product/windows-nt-2000/patches) is required. 
+   To use all common controls, [Internet Explorer 5.5](https://winworldpc.com/product/internet-explorer/ie-55) or higher is recommended.  
+ - For Windows XP, [Service Pack 3](https://www.catalog.update.microsoft.com/Search.aspx?q=KB936929) is recommended, but not required.
+
+### Using in C/C++ Win32 Development
+ How to use this library in your projects to compile for NT 5.x:  
+ - First, you should maybe read the [original blog post](https://colinfinck.de/posts/modern-visual-studio-meets-ancient-windows/).
+ - The .lib MUST be linked in first, before any other windows or C runtime lib.
+
+## More Information
+ There is also [a branch](https://github.com/enlyze/EnlyzeWinCompatLib/tree/clang-vs2022) to let Clang-compiled applications run 
 on even older Windows versions, down to [Windows NT 4.0](https://en.wikipedia.org/wiki/Windows_NT_4.0) (with SP6 and I.E. 4).  
 
 Read the [corresponding blog post](https://building.enlyze.com/posts/targeting-25-years-of-windows-with-visual-studio-2019/) for more information.
 
-#### Credits
-
-A large credit goes to [Colin Finck](https://github.com/ColinFinck) for the [original library code](https://github.com/enlyze/EnlyzeWinCompatLib/tree/msvc-v141-xp).
+### Credits
+ A large credit goes to [Colin Finck](https://github.com/ColinFinck) for the 
+ [original library code](https://github.com/enlyze/EnlyzeWinCompatLib/tree/msvc-v141-xp).
