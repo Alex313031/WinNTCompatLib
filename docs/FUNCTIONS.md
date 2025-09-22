@@ -4,9 +4,10 @@ For building libnt5 from source, see [BUILDING.md](BUILDING.md).
 
 ## List of Redirected Functions
 
-This is a list of functions that are redirected/overridden, "spoofed", whatever you wanna call it, in libnt5, 
-as well as other information such ase when the function was introduced into Windows, info about the function, 
-and whether the function has an alternative implementation supplied or just returns `null`.
+This is a list of functions that are redirected/overridden, "spoofed", whatever you wanna call it, in libnt5. 
+They are grouped by when the function was introduced into Windows. 
+Click the function name to see the Microsoft documentation link of info about the function. 
+There is info on whether the function has an alternative implementation supplied or just returns i.e. `null`.
 
 The default target for the v141_xp Toolchain + Windows 7.1 SDK is XP Service Pack 3. However, there are some 
 functions that are only present in XP that we must provide function definitions and .dll imports for, and a 
@@ -18,37 +19,44 @@ to run on Windows XP RTM (i.e. "Gold Master"), SP1 and SP2.
 __Introduced in Windows XP RTM__  
  - Spoofed for Windows 2000 support, the primary goal of this library.
 
-GetModuleHandleEx  
-GetNumaHighestNodeNumber  
-GetVersionEx  
-InitializeSListHead  
-InterlockedFlushSList  
-InterlockedPopEntrySList  
-InterlockedPushEntrySList  
-QueryDepthSList  
+[GetModuleHandleEx](https://learn.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulehandleexw)  
+[GetNumaHighestNodeNumber](https://learn.microsoft.com/en-us/windows/win32/api/systemtopologyapi/nf-systemtopologyapi-getnumahighestnodenumber)  
+[GetVersionEx](https://learn.microsoft.com/en-us/windows/win32/api/sysinfoapi/nf-sysinfoapi-getversionexw)  
+[InitializeSListHead](https://learn.microsoft.com/en-us/windows/win32/api/interlockedapi/nf-interlockedapi-initializeslisthead)  
+[InterlockedFlushSList](https://learn.microsoft.com/en-us/windows/win32/api/interlockedapi/nf-interlockedapi-interlockedflushslist)  
+[InterlockedPopEntrySList](https://learn.microsoft.com/en-us/windows/win32/api/interlockedapi/nf-interlockedapi-interlockedpopentryslist)  
+[InterlockedPushEntrySList](https://learn.microsoft.com/en-us/windows/win32/api/interlockedapi/nf-interlockedapi-interlockedpushentryslist)  
+[QueryDepthSList](https://learn.microsoft.com/en-us/windows/win32/api/interlockedapi/nf-interlockedapi-querydepthslist)  
 
 *added by me*  
-HeapQueryInformation  
-HeapSetInformation  
+[HeapQueryInformation](https://learn.microsoft.com/en-us/windows/win32/api/heapapi/nf-heapapi-heapqueryinformation)  
+[HeapSetInformation](https://learn.microsoft.com/en-us/windows/win32/api/heapapi/nf-heapapi-heapsetinformation)  
 
 *yet to implement*  
-DnsFree  
-GetNativeSystemInfo  
-WTSQueryUserToken  
+[DnsFree](https://learn.microsoft.com/en-us/windows/win32/api/windns/nf-windns-dnsfree)  
+[GetNativeSystemInfo](https://learn.microsoft.com/en-us/windows/win32/api/sysinfoapi/nf-sysinfoapi-getnativesysteminfo)  
+[WTSQueryUserToken](https://learn.microsoft.com/en-us/windows/win32/api/wtsapi32/nf-wtsapi32-wtsqueryusertoken)  
 
 __Introduced in Windows XP Service Pack 1__  
+ - To allow running on XP RTM.
+
 *yet to implement*  
-SetDllDirectory  
-GetProcessId  
+[SetDllDirectory](https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-setdlldirectoryw)  
+[GetProcessId](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-getprocessid)  
 
 __Introduced in Windows XP Service Pack 2__  
-DecodePointer  
-EncodePointer  
-EncodeSystemPointer (redirect to above)  
-DecodeSystemPointer (redirect to above)  
+ - To allow running on XP RTM.
+
+[DecodePointer](https://learn.microsoft.com/en-us/previous-versions/bb432242(v=vs.85))  
+[EncodePointer](https://learn.microsoft.com/en-us/previous-versions/bb432254(v=vs.85))  
+[DecodeSystemPointer](https://learn.microsoft.com/en-us/previous-versions/bb432243(v=vs.85)) (redirect to above)  
+[EncodeSystemPointer](https://learn.microsoft.com/en-us/previous-versions/bb432255(v=vs.85)) (redirect to above)  
 
 __Introduced in Windows XP Service Pack 3__  
-GetLogicalProcessorInformation
+ - To allow running on XP SP2.
+
+[GetLogicalProcessorInformation](https://learn.microsoft.com/en-us/windows/win32/api/sysinfoapi/nf-sysinfoapi-getlogicalprocessorinformation)  
 
 ### User Functions
-[none]
+[ImmDisableTextFrameService](https://learn.microsoft.com/en-us/windows/win32/api/imm/nf-imm-immdisabletextframeservice) 
+was introduced in Windows Server 2003, it is a user mode function. New code should use [ImmDisableIME](https://learn.microsoft.com/en-us/windows/win32/api/imm/nf-imm-immdisableime) instead.
