@@ -21,9 +21,9 @@ Some of these functions use [ReactOS](https://reactos.org/) implementations.
 
 [GetModuleHandleEx()](https://learn.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulehandleexw) - Returns `FALSE`.
 
-[GetNumaHighestNodeNumber()](https://learn.microsoft.com/en-us/windows/win32/api/systemtopologyapi/nf-systemtopologyapi-getnumahighestnodenumber) - Sets HighestNodeNumber to `0` and returns `TRUE`.
+[GetNumaHighestNodeNumber()](https://learn.microsoft.com/en-us/windows/win32/api/systemtopologyapi/nf-systemtopologyapi-getnumahighestnodenumber) - Sets *HighestNodeNumber* to `0` and returns `TRUE`.
 
-[GetVersionEx()](https://learn.microsoft.com/en-us/windows/win32/api/sysinfoapi/nf-sysinfoapi-getversionexw) - On Windows 2000, returns `dwMajorVersion = 5 dwMinorVersion = 1` (5.1), otherwise uses the real GetVersionExW() function.
+[GetVersionEx()](https://learn.microsoft.com/en-us/windows/win32/api/sysinfoapi/nf-sysinfoapi-getversionexw) - On Windows 2000, returns `dwMajorVersion = 5 dwMinorVersion = 1` (5.1), otherwise it uses the real *GetVersionExW()* function.
 
 [InitializeSListHead()](https://learn.microsoft.com/en-us/windows/win32/api/interlockedapi/nf-interlockedapi-initializeslisthead) - Uses alternative ReactOS implementation.
 
