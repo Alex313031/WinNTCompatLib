@@ -60,6 +60,7 @@ executable("libnt5_test") {
 
   sources = [
     "tests\libnt5_test.cc",
+    "tests\libnt5_test.h",
   ]
 
   public_deps = [
