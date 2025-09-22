@@ -1,9 +1,11 @@
-# LibNT5
+# LibNT5 <img src="assets/libnt5_logo.png">
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.md)
 
 A static/shared library to allow applications compiled with the [Windows 7.1 SDK + v141_xp toolset](https://learn.microsoft.com/en-us/cpp/build/configuring-programs-for-windows-xp) 
 to run on Windows 2000 SP4 and Windows XP RTM - SP2.
+
+<img src="assets/Designed_for_Windows_2000.png">
 
 It is a fork of [EnlyzeWinCompatLib](https://github.com/enlyze/EnlyzeWinCompatLib), modified, modernized  
 and made to compile on MSVS 2022 AS WELL AS with [GN](https://gn.googlesource.com/gn/), [Ninja](https://ninja-build.org/)
