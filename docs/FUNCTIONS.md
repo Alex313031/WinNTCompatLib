@@ -1,5 +1,7 @@
 ## libnt5 Functions
 
+For building libnt5 from source, see [BUILDING.md](BUILDING.md).
+
 ### List of Redirected Functions
 
 This is a list of functions that are redirected/overridden, "spoofed", whatever you wanna call it, in libnt5, 
