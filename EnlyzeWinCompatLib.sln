@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EnlyzeWinCompatLib", "EnlyzeWinCompatLib.vcxproj", "{C2C396B8-B585-4F0D-BD37-CF6D4347140F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EnlyzeWinCompatLib", "src\EnlyzeWinCompatLib.vcxproj", "{C2C396B8-B585-4F0D-BD37-CF6D4347140F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
