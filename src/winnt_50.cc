@@ -16,8 +16,11 @@ typedef PSLIST_ENTRY (WINAPI *PFN_INTERLOCKEDPOPENTRYSLIST)(PSLIST_HEADER ListHe
 typedef PSLIST_ENTRY (WINAPI *PFN_INTERLOCKEDPUSHENTRYSLIST)(PSLIST_HEADER ListHead, PSLIST_ENTRY ListEntry);
 typedef USHORT (WINAPI *PFN_QUERYDEPTHSLIST)(PSLIST_HEADER ListHead);
 
-typedef BOOL (WINAPI *PFN_HEAPQUERYINFORMATION)(HANDLE hHeap, HEAP_INFORMATION_CLASS heapClass, PVOID heapInfo, SIZE_T heapLength, PSIZE_T returnLength);
-typedef BOOL (WINAPI *PFN_HEAPSETINFORMATION)(HANDLE hHeap, HEAP_INFORMATION_CLASS heapClass, PVOID heapInfo, SIZE_T heapLength);
+typedef BOOL (WINAPI *PFN_HEAP_QUERY_INFORMATION)(HANDLE hHeap, HEAP_INFORMATION_CLASS heapClass, PVOID heapInfo, SIZE_T heapLength, PSIZE_T returnLength);
+typedef BOOL (WINAPI *PFN_HEAP_SET_INFORMATION)(HANDLE hHeap, HEAP_INFORMATION_CLASS heapClass, PVOID heapInfo, SIZE_T heapLength);
+
+typedef void (WINAPI *PFN_GET_SYSTEM_INFO)(SYSTEM_INFO* lpSystemInfo);
+typedef void (WINAPI *PFN_GET_NATIVE_SYSTEM_INFO)(SYSTEM_INFO* lpSystemInfo);
 
 static PFN_GETMODULEHANDLEEXW pfnGetModuleHandleExW = nullptr;
 static PFN_GETNUMAHIGHESTNODENUMBER pfnGetNumaHighestNodeNumber = nullptr;
@@ -28,8 +31,11 @@ static PFN_INTERLOCKEDPOPENTRYSLIST pfnInterlockedPopEntrySList = nullptr;
 static PFN_INTERLOCKEDPUSHENTRYSLIST pfnInterlockedPushEntrySList = nullptr;
 static PFN_QUERYDEPTHSLIST pfnQueryDepthSList = nullptr;
 
-static PFN_HEAPQUERYINFORMATION pfnHeapQueryInformation = nullptr;
-static PFN_HEAPSETINFORMATION pfnHeapSetInformation = nullptr;
+static PFN_HEAP_QUERY_INFORMATION pfnHeapQueryInformation = nullptr;
+static PFN_HEAP_SET_INFORMATION pfnHeapSetInformation = nullptr;
+
+static PFN_GET_SYSTEM_INFO pfnGetSystemInfo = nullptr;
+static PFN_GET_NATIVE_SYSTEM_INFO pfnGetNativeSystemInfo = nullptr;
 
 static BOOL WINAPI
 _CompatGetModuleHandleExW(DWORD dwFlags, LPCWSTR lpModuleName, HMODULE* phModule)
@@ -238,6 +244,25 @@ _CompatHeapSetInformation(HANDLE HeapHandle,
   return FALSE;
 }
 
+static void WINAPI
+_CompatGetNativeSystemInfo(SYSTEM_INFO* lpSystemInfo) {
+  //UNREFERENCED_PARAMETER(lpSystemInfo);
+  SYSTEM_INFO si;
+  if (!pfnGetSystemInfo) {
+    HMODULE hKernel32 = GetModuleHandleW(L"kernel32");
+    pfnGetSystemInfo = reinterpret_cast<PFN_GET_SYSTEM_INFO>(GetProcAddress(hKernel32, "GetSystemInfo"));
+    if (!pfnGetSystemInfo) {
+      return;
+    }
+  }
+  pfnGetSystemInfo(&si);
+  // If detected unsupported x64 architecture (but we shouldn't get this far on Win XP).
+  if (si.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_UNKNOWN) {
+    si.wProcessorArchitecture = PROCESSOR_ARCHITECTURE_INTEL;
+  }
+  lpSystemInfo = &si;
+}
+
 extern "C" BOOL WINAPI
 LibGetModuleHandleExW(DWORD dwFlags, LPCWSTR lpModuleName, HMODULE * phModule)
 {
@@ -394,7 +419,7 @@ LibHeapQueryInformation(HANDLE hHeap,
     {
         // Check if the API is provided by kernel32, otherwise fall back to our implementation.
         HMODULE hKernel32 = GetModuleHandleW(L"kernel32");
-        pfnHeapQueryInformation = reinterpret_cast<PFN_HEAPQUERYINFORMATION>(GetProcAddress(hKernel32, "HeapQueryInformation"));
+        pfnHeapQueryInformation = reinterpret_cast<PFN_HEAP_QUERY_INFORMATION>(GetProcAddress(hKernel32, "HeapQueryInformation"));
         if (!pfnHeapQueryInformation)
         {
             pfnHeapQueryInformation = _CompatHeapQueryInformation;
@@ -413,7 +438,7 @@ LibHeapSetInformation(HANDLE hHeap,
     {
         // Check if the API is provided by kernel32, otherwise fall back to our implementation.
         HMODULE hKernel32 = GetModuleHandleW(L"kernel32");
-        pfnHeapSetInformation = reinterpret_cast<PFN_HEAPSETINFORMATION>(GetProcAddress(hKernel32, "HeapSetInformation"));
+        pfnHeapSetInformation = reinterpret_cast<PFN_HEAP_SET_INFORMATION>(GetProcAddress(hKernel32, "HeapSetInformation"));
         if (!pfnHeapSetInformation)
         {
             pfnHeapSetInformation = _CompatHeapSetInformation;
@@ -421,4 +446,20 @@ LibHeapSetInformation(HANDLE hHeap,
     }
 
     return pfnHeapSetInformation(hHeap, heapClass, heapInfo, heapLength);
+}
+
+extern "C" void WINAPI
+LibGetNativeSystemInfo(SYSTEM_INFO* lpSystemInfo) {
+    if (!pfnGetNativeSystemInfo)
+    {
+        // Check if the API is provided by kernel32, otherwise fall back to our implementation.
+        HMODULE hKernel32 = GetModuleHandleW(L"kernel32");
+        pfnGetNativeSystemInfo = reinterpret_cast<PFN_GET_NATIVE_SYSTEM_INFO>(GetProcAddress(hKernel32, "GetNativeSystemInfo"));
+        if (!pfnGetNativeSystemInfo)
+        {
+            pfnGetNativeSystemInfo = _CompatGetNativeSystemInfo;
+        }
+    }
+
+    return pfnGetNativeSystemInfo(lpSystemInfo);
 }

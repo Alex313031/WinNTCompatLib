@@ -14,7 +14,8 @@ few functions that were only introduced in service packs as well. Those must als
 to run on Windows XP RTM (i.e. "Gold Master"), SP1 and SP2.
 
 ## Kernel Functions
-Some of these functions use [ReactOS](https://reactos.org/) implementations.
+Some of these functions use [ReactOS](https://reactos.org/) implementations.  
+See also > [Here](https://betawiki.net/wiki/User:Uncle_Captain/Drafts/Kernel_functions_introduced_in_Windows) for more historical info on these.
 
 ### Introduced in Windows XP RTM
  __*- Spoofed to allow running on Windows 2000.*__
@@ -41,7 +42,7 @@ Some of these functions use [ReactOS](https://reactos.org/) implementations.
  
 [DnsFree()](https://learn.microsoft.com/en-us/windows/win32/api/windns/nf-windns-dnsfree) - *yet to implement* 
 
-[GetNativeSystemInfo()](https://learn.microsoft.com/en-us/windows/win32/api/sysinfoapi/nf-sysinfoapi-getnativesysteminfo) - *yet to implement* 
+[GetNativeSystemInfo()](https://learn.microsoft.com/en-us/windows/win32/api/sysinfoapi/nf-sysinfoapi-getnativesysteminfo) - On Windows 2000, uses the `GetSystemInfo()` function, otherwise it uses the real *GetSystemInfo()* function. *Added by me.*
 
 [WTSQueryUserToken()](https://learn.microsoft.com/en-us/windows/win32/api/wtsapi32/nf-wtsapi32-wtsqueryusertoken) - *yet to implement* 
 
@@ -62,6 +63,8 @@ Some of these functions use [ReactOS](https://reactos.org/) implementations.
 [DecodeSystemPointer()](https://learn.microsoft.com/en-us/previous-versions/bb432243(v=vs.85)) - *yet to implement* 
 
 [EncodeSystemPointer()](https://learn.microsoft.com/en-us/previous-versions/bb432255(v=vs.85)) - *yet to implement* 
+
+[IsWow64Process()](https://learn.microsoft.com/en-us/windows/win32/api/sysinfoapi/nf-sysinfoapi-getnativesysteminfo) - *yet to implement* 
 
 ### Introduced in Windows XP Service Pack 3
  __*- Spoofed to allow running on XP RTM - XP SP2.*__

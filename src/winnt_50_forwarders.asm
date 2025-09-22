@@ -17,6 +17,7 @@ EXTERN _LibQueryDepthSList@4 : PROC
 
 EXTERN _LibHeapQueryInformation@20 : PROC
 EXTERN _LibHeapSetInformation@16 : PROC
+EXTERN _LibGetNativeSystemInfo@4 : PROC
 
 .data
 
@@ -49,5 +50,8 @@ __imp__HeapQueryInformation@20 dd _LibHeapQueryInformation@20
 
 PUBLIC __imp__HeapSetInformation@16
 __imp__HeapSetInformation@16 dd _LibHeapSetInformation@16
+
+PUBLIC __imp__GetNativeSystemInfo@4
+__imp__GetNativeSystemInfo@4 dd _LibGetNativeSystemInfo@4
 
 END
