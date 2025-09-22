@@ -1,4 +1,4 @@
-## Building
+## Building libnt5 from source
 
 ### Building with Visual Studio
 Note: The shared library and test executables can't be built yet.
@@ -15,3 +15,7 @@ as the build system. Using that also requires [downloading LLVM]().
 ```code
  - For your GN args, use the debug_args.gn or release_args.gn
 ```
+
+### How it works
+
+To see a list of all of the win32 system/kernel functions that this library overrides, see [FUNCTIONS.md](FUNCTIONS.md).

@@ -17,7 +17,8 @@ and made to compile on Visual Studio 2022 *as well as* with [GN](https://gn.goog
  - Update defines
  - Add more headers
  - Update toolchain, use static linking and /NODEFAULTLIB for everything
- - Provide spoofer functions for [*HeapQueryInformation*](), [*HeapSetInformation*](), and [*SetDllDirectoryW*]().
+ - Provide spoofer functions for [*HeapQueryInformation*](https://learn.microsoft.com/en-us/windows/win32/api/heapapi/nf-heapapi-heapqueryinformation), 
+   [*HeapSetInformation*](https://learn.microsoft.com/en-us/windows/win32/api/heapapi/nf-heapapi-heapsetinformation), and [*SetDllDirectory*](https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-setdlldirectoryw).
 
 ## Building
 
@@ -31,8 +32,9 @@ See [BUILDING.md](docs/BUILDING.md)
    To use all common controls, [Internet Explorer 5.5](https://winworldpc.com/product/internet-explorer/ie-55) or higher is recommended.  
  - For Windows XP, [Service Pack 3](https://www.catalog.update.microsoft.com/Search.aspx?q=KB936929) is recommended, but not required.
 
-### Using in C/C++ Win32 Development
- To use this library in your own projects, see [USAGE.md](docs/USAGE.md)
+### Using in Win32 Development
+ To use this library in your own projects, see [USAGE.md](docs/USAGE.md).  
+ To see all the win32 functions this library spoofs, see [FUNCTIONS.md](docs/FUNCTIONS.md).  
 
 ## More Information
  There is also [a branch](https://github.com/enlyze/EnlyzeWinCompatLib/tree/clang-vs2022) to let Clang-compiled applications run 
