@@ -21,21 +21,7 @@ and made to compile on Visual Studio 2022 *as well as* with [GN](https://gn.goog
 
 ## Building
 
-### Building with Visual Studio
-Note: The shared library and test executables can't be built yet.
-
-```code
- - Open .sln
- - Build as normal, the compiled .libs will be placed in "dist".
-```
-
-### Building with GN/Ninja && LLVM/Clang
- This is the default way this library is built. It requires using my [gn-build](https://github.com/Alex313031/gn-build#readme) repository 
-as the build system. Using that also requires [downloading LLVM]().  
-
-```code
- - For your GN args, use the debug_args.gn or release_args.gn
-```
+See [BUILDING.md](docs/BUILDING.md)
 
 ## Usage
 
@@ -46,9 +32,7 @@ as the build system. Using that also requires [downloading LLVM]().
  - For Windows XP, [Service Pack 3](https://www.catalog.update.microsoft.com/Search.aspx?q=KB936929) is recommended, but not required.
 
 ### Using in C/C++ Win32 Development
- How to use this library in your projects to compile for NT 5.x:  
- - First, you should maybe read the [original blog post](https://colinfinck.de/posts/modern-visual-studio-meets-ancient-windows/).
- - The .lib MUST be linked in first, before any other windows or C runtime lib.
+ To use this library in your own projects, see [USAGE.md](docs/USAGE.md)
 
 ## More Information
  There is also [a branch](https://github.com/enlyze/EnlyzeWinCompatLib/tree/clang-vs2022) to let Clang-compiled applications run 
