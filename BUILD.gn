@@ -104,11 +104,17 @@ static_library("libnt5_static") {
     "src/winnt_51.cc",
     "src/winnt_51_sp2.cc",
   ]
-  sources += [
-    "src/winnt_50_forwarders.asm",
-    "src/winnt_51_forwarders.asm",
-    "src/winnt_51_sp2_forwarders.asm",
-  ]
+  if (current_cpu == "x86") {
+    sources += [
+      "src/winnt_50_forwarders.asm",
+      "src/winnt_51_forwarders.asm",
+      "src/winnt_51_sp2_forwarders.asm",
+    ]
+  } else if (current_cpu == "x64") {
+    sources += [
+      #"src/winnt_52_sp2_forwarders.asm",
+    ]
+  }
   output_name = "libnt5"
 }
 

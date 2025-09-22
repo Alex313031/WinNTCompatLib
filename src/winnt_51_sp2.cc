@@ -11,6 +11,9 @@ typedef BOOL (WINAPI *PFN_GETLOGICALPROCESSORINFORMATION)(PSYSTEM_LOGICAL_PROCES
 
 static PFN_GETLOGICALPROCESSORINFORMATION pfnGetLogicalProcessorInformation = nullptr;
 
+// Make all the below a no-op on x64.
+#if !defined(_WIN64)
+
 static BOOL WINAPI
 _CompatGetLogicalProcessorInformation(PSYSTEM_LOGICAL_PROCESSOR_INFORMATION Buffer, PDWORD ReturnedLength)
 {
@@ -40,3 +43,8 @@ LibGetLogicalProcessorInformation(PSYSTEM_LOGICAL_PROCESSOR_INFORMATION Buffer, 
 
     return pfnGetLogicalProcessorInformation(Buffer, ReturnedLength);
 }
+
+// _WIN64 is defined
+#else
+
+#endif // !defined(_WIN64)

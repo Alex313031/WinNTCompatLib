@@ -13,6 +13,9 @@ typedef PVOID (WINAPI *PFN_ENCODEPOINTER)(PVOID Ptr);
 static PFN_DECODEPOINTER pfnDecodePointer = nullptr;
 static PFN_ENCODEPOINTER pfnEncodePointer = nullptr;
 
+// Make all the below a no-op on x64.
+#if !defined(_WIN64)
+
 static PVOID WINAPI
 _CompatDecodePointer(PVOID Ptr)
 {
@@ -60,3 +63,12 @@ LibEncodePointer(PVOID Ptr)
 
     return pfnEncodePointer(Ptr);
 }
+
+// _WIN64 is defined
+#else
+
+void HandleAmd64() {
+  return;
+}
+
+#endif // !defined(_WIN64)

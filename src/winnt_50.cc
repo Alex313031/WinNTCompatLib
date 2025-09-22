@@ -37,6 +37,9 @@ static PFN_HEAP_SET_INFORMATION pfnHeapSetInformation = nullptr;
 static PFN_GET_SYSTEM_INFO pfnGetSystemInfo = nullptr;
 static PFN_GET_NATIVE_SYSTEM_INFO pfnGetNativeSystemInfo = nullptr;
 
+// Make all the below a no-op on x64.
+#if !defined(_WIN64)
+
 static BOOL WINAPI
 _CompatGetModuleHandleExW(DWORD dwFlags, LPCWSTR lpModuleName, HMODULE* phModule)
 {
@@ -463,3 +466,12 @@ LibGetNativeSystemInfo(SYSTEM_INFO* lpSystemInfo) {
 
     return pfnGetNativeSystemInfo(lpSystemInfo);
 }
+
+// _WIN64 is defined
+#else
+
+void HandleAmd64() {
+  return;
+}
+
+#endif // !defined(_WIN64)
