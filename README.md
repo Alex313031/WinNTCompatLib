@@ -17,8 +17,8 @@ and made to compile on Visual Studio 2022 *as well as* with [GN](https://gn.goog
  - Update defines
  - Add more headers
  - Update toolchain, use static linking and /NODEFAULTLIB for everything
- - Provide spoofer functions for [*HeapQueryInformation*](https://learn.microsoft.com/en-us/windows/win32/api/heapapi/nf-heapapi-heapqueryinformation), 
-   [*HeapSetInformation*](https://learn.microsoft.com/en-us/windows/win32/api/heapapi/nf-heapapi-heapsetinformation), and [*SetDllDirectory*](https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-setdlldirectoryw).
+ - Provide spoofer functions for [*HeapQueryInformation()*](https://learn.microsoft.com/en-us/windows/win32/api/heapapi/nf-heapapi-heapqueryinformation), 
+   [*HeapSetInformation()*](https://learn.microsoft.com/en-us/windows/win32/api/heapapi/nf-heapapi-heapsetinformation), and other functions missing from the original library.
 
 ## Building
 
