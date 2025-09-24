@@ -48,6 +48,7 @@ See also > [Here](https://betawiki.net/wiki/User:Uncle_Captain/Drafts/Kernel_fun
 
 ### Introduced in Windows XP Service Pack 1
  __*- Spoofed to allow running on XP RTM.*__
+ File: winnt_51_rtm.cc
 
 [GetDllDirectory()](https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-getdlldirectoryw) - *yet to implement* 
 
@@ -57,6 +58,7 @@ See also > [Here](https://betawiki.net/wiki/User:Uncle_Captain/Drafts/Kernel_fun
 
 ### Introduced in Windows XP Service Pack 2
  __*- Spoofed to allow running on XP RTM - SP1.*__
+ File: winnt_51_sp1.cc
 
 [DecodePointer()](https://learn.microsoft.com/en-us/previous-versions/bb432242(v=vs.85)) - Simply returns the original pointer, which is enough.
 
@@ -70,6 +72,7 @@ See also > [Here](https://betawiki.net/wiki/User:Uncle_Captain/Drafts/Kernel_fun
 
 ### Introduced in Windows XP Service Pack 3
  __*- Spoofed to allow running on XP RTM - XP SP2.*__
+ File: winnt_51_sp2.cc
 
 [GetLogicalProcessorInformation()](https://learn.microsoft.com/en-us/windows/win32/api/sysinfoapi/nf-sysinfoapi-getlogicalprocessorinformation) - Returns `ERROR_CALL_NOT_IMPLEMENTED`.
 
