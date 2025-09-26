@@ -63,24 +63,28 @@ executable("libnt5_test") {
     "tests\libnt5_test.h",
   ]
 
-  public_deps = [
-    ":libnt5",
-  ]
+  if (use_libnt5) {
+    public_deps = [
+      ":libnt5",
+    ]
+  }
 }
 
 # Headers for consumers of the library
 source_set("libnt5_headers") {
-  configs -= [ "//build/config/win:nominmax", ]
-  configs -= [ "//build/config/win:default_libs" ]
-  configs += [
-    "//build/config/win:lean_and_mean",
-    "//build/config:no_default_lib",
-  ]
+  if (use_libnt5) {
+    configs -= [ "//build/config/win:nominmax", ]
+    configs -= [ "//build/config/win:default_libs" ]
+    configs += [
+      "//build/config/win:lean_and_mean",
+      "//build/config:no_default_lib",
+    ]
 
-  sources = [
-    "src/libnt5.h",
-    "src/libnt5_dll.h",
-  ]
+    sources = [
+      "src/libnt5.h",
+      "src/libnt5_dll.h",
+    ]
+  }
 }
 
 # Originally called EnlyzeWinCompatLib
@@ -163,20 +167,19 @@ config("libnt5_private_config") {
 
 # Compiler config for dependants/consumers to link the library in properly for Win 2k
 config("libnt5_public_config") {
+  defines = []
   cflags = []
   ldflags = []
   libs = []
 
-  include_dirs = [
-    "src/",
-  ]
+  if (use_libnt5) {
+    defines += [ "USING_LIBNT5" ]
+    include_dirs = [ "src/", ]
 
-  ldflags += [
-    "/DEFAULTLIB:libnt5.lib",
-  ]
-  libs += [
-    "libnt5.lib",
-  ]
+    # Todo, move all libnt5 .lib configs from //build/config/win/BUILD.gn to here.
+    ldflags += [ "/DEFAULTLIB:libnt5.lib", ]
+    libs += [ "libnt5.lib", ]
+  }
 }
 
 assert(use_legacy_toolchain, "libnt5 should only be used for x86 legacy toolchain builds!")

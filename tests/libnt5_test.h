@@ -15,13 +15,18 @@
  #endif
 #endif
 
-#pragma comment(lib, "libnt5.lib")
+#if _WIN32_WINNT == 0x0500 && defined(USING_LIBNT5)
+#include <libnt5.h>
+#endif // _WIN32_WINNT = 0x0500
 
 #include <windows.h>
 #include <commctrl.h>
 #include <tchar.h>
 
 extern HINSTANCE g_hInstance;
+
+// Dummy file output for conhost
+static FILE* fDummyFile;
 
 void OpenMessageBox(LPCWSTR MsgTitle, LPCWSTR MsgContent);
 
