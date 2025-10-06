@@ -76,7 +76,8 @@ See also > [Here](https://betawiki.net/wiki/User:Uncle_Captain/Drafts/Kernel_fun
  __*- Spoofed to allow running on XP RTM - XP SP2.*__
  File: [winnt_51_sp2.cc](../src/winnt_51_sp2.cc.cc)
 
-[GetLogicalProcessorInformation()](https://learn.microsoft.com/en-us/windows/win32/api/sysinfoapi/nf-sysinfoapi-getlogicalprocessorinformation) - Returns `ERROR_CALL_NOT_IMPLEMENTED`.
+[GetLogicalProcessorInformation()](https://learn.microsoft.com/en-us/windows/win32/api/sysinfoapi/nf-sysinfoapi-getlogicalprocessorinformation) - Returns `ERROR_CALL_NOT_IMPLEMENTED`. 
+ Be sure not to call this in any critical code that NEEDS to know how many CPUS the machine has via this function.
 
 ### User Functions
 The user mode function [ImmDisableTextFrameService()](https://learn.microsoft.com/en-us/windows/win32/api/imm/nf-imm-immdisabletextframeservice) 
