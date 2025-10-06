@@ -8,9 +8,10 @@ They are grouped by when the function was introduced into Windows.
 Click the function name to see the Microsoft documentation link of info about the function. 
 There is info on whether the function has an alternative implementation supplied or just returns i.e. `null`.
 
-The default target for the v141_xp Toolchain + Windows 7.1 SDK is XP Service Pack 3. However, there are some 
-functions that are only present in XP that we must provide function definitions and .dll imports for, and a 
-few functions that were only introduced in service packs as well. Those must also be spoofed to allow applications 
+The default target for the [v141_xp Toolchain](https://learn.microsoft.com/en-us/cpp/build/configuring-programs-for-windows-xp/) 
+(plus associated [Windows 7.1 SDK](https://www.microsoft.com/en-us/download/details.aspx?id=8442)) is [XP Service Pack 3](https://en.wikipedia.org/wiki/Windows_XP#Service_packs). 
+However, there are some functions that are only present in XP that we must provide function definitions and .dll imports for, 
+and a few functions that were only introduced in service packs as well. Those must also be spoofed to allow applications 
 to run on Windows XP RTM (i.e. "Gold Master"), SP1 and SP2.
 
 ## Kernel Functions
@@ -19,6 +20,7 @@ See also > [Here](https://betawiki.net/wiki/User:Uncle_Captain/Drafts/Kernel_fun
 
 ### Introduced in Windows XP RTM
  __*- Spoofed to allow running on Windows 2000.*__
+ File: [winnt_50.cc](../src/winnt_50.cc)
 
 [GetModuleHandleEx()](https://learn.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulehandleexw) - Returns `FALSE`.
 
@@ -46,9 +48,9 @@ See also > [Here](https://betawiki.net/wiki/User:Uncle_Captain/Drafts/Kernel_fun
 
 [WTSQueryUserToken()](https://learn.microsoft.com/en-us/windows/win32/api/wtsapi32/nf-wtsapi32-wtsqueryusertoken) - *yet to implement* 
 
-### Introduced in Windows XP Service Pack 1
+### Added in Windows XP Service Pack 1+
  __*- Spoofed to allow running on XP RTM.*__
- File: winnt_51_rtm.cc
+ File: [winnt_51_rtm.cc](../src/winnt_51_rtm.cc)
 
 [GetDllDirectory()](https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-getdlldirectoryw) - *yet to implement* 
 
@@ -56,9 +58,9 @@ See also > [Here](https://betawiki.net/wiki/User:Uncle_Captain/Drafts/Kernel_fun
 
 [GetProcessId()](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-getprocessid) - *yet to implement* 
 
-### Introduced in Windows XP Service Pack 2
- __*- Spoofed to allow running on XP RTM - SP1.*__
- File: winnt_51_sp1.cc
+### Added in Windows XP Service Pack 2+
+ __*- Spoofed to allow running on XP RTM & SP1.*__
+ File: [winnt_51_sp1.cc](../src/winnt_51_sp1.cc)
 
 [DecodePointer()](https://learn.microsoft.com/en-us/previous-versions/bb432242(v=vs.85)) - Simply returns the original pointer, which is enough.
 
@@ -70,9 +72,9 @@ See also > [Here](https://betawiki.net/wiki/User:Uncle_Captain/Drafts/Kernel_fun
 
 [IsWow64Process()](https://learn.microsoft.com/en-us/windows/win32/api/sysinfoapi/nf-sysinfoapi-getnativesysteminfo) - *yet to implement* 
 
-### Introduced in Windows XP Service Pack 3
+### Added in Windows XP Service Pack 3+
  __*- Spoofed to allow running on XP RTM - XP SP2.*__
- File: winnt_51_sp2.cc
+ File: [winnt_51_sp2.cc](../src/winnt_51_sp2.cc.cc)
 
 [GetLogicalProcessorInformation()](https://learn.microsoft.com/en-us/windows/win32/api/sysinfoapi/nf-sysinfoapi-getlogicalprocessorinformation) - Returns `ERROR_CALL_NOT_IMPLEMENTED`.
 

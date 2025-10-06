@@ -1,6 +1,7 @@
 # LibNT5 <img src="assets/libnt5_logo.png" width="46">
 
-<img src="assets/Designed_for_Windows_2000.png" height="168" align="right">
+<img src="assets/Designed_for_Windows_2000.png#gh-light-mode-only" height="168" align="right">
+<img src="assets/Designed_for_Windows_2000_white.png#gh-dark-mode-only" height="168" align="right">
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.md)
 
