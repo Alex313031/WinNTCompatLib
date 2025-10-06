@@ -44,7 +44,7 @@ See also > [Here](https://betawiki.net/wiki/User:Uncle_Captain/Drafts/Kernel_fun
  
 [DnsFree()](https://learn.microsoft.com/en-us/windows/win32/api/windns/nf-windns-dnsfree) - *yet to implement* 
 
-[GetNativeSystemInfo()](https://learn.microsoft.com/en-us/windows/win32/api/sysinfoapi/nf-sysinfoapi-getnativesysteminfo) - On Windows 2000, uses the `GetSystemInfo()` function, otherwise it uses the real *GetSystemInfo()* function. *Added by me.*
+[GetNativeSystemInfo()](https://learn.microsoft.com/en-us/windows/win32/api/sysinfoapi/nf-sysinfoapi-getnativesysteminfo) - On Windows 2000, uses the `GetSystemInfo()` function, otherwise it uses the real *GetNativeSystemInfo()* function. *Added by me.*
 
 [WTSQueryUserToken()](https://learn.microsoft.com/en-us/windows/win32/api/wtsapi32/nf-wtsapi32-wtsqueryusertoken) - *yet to implement* 
 
